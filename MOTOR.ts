@@ -98,10 +98,10 @@ namespace Servo {
 	 * Servo Execute
 	 * @param degree [0-180] degree of servo; eg: 90, 0, 180
 	*/
-    //% blockId=setServo block="电机 方向选择|%channel|角度 %degree"
+    //% blockId=setServoMotor block="电机 方向选择|%channel|角度 %degree"
     //% weight=85
     //% degree.min=0 degree.max=180
-    export function Servo(channel: MOTOR,degree: number): void {
+    export function ServoMotor(channel: MOTOR,degree: number): void {
 		if (!initialized) {
             initPCA9685();
         }
@@ -113,12 +113,12 @@ namespace Servo {
 	
 	/**
 	 * Servo Execute
-	 * @param pulse [0-20000] pulse of servo; eg: 1500, 500, 2500
+	 * @param pulse [0-19999] pulse of servo; eg: 1500, 500, 2500
 	*/
-    //% blockId=setServoPulse block="电机  方向选择|%channel|速度 %pulse"
+    //% blockId=setServoPulseMotor block="电机  方向选择|%channel|速度 %pulse"
     //% weight=85
     //% pulse.min=500 pulse.max=2500
-    export function ServoPulse(channel: MOTOR,pulse: number): void {
+    export function ServoPulseMotor(channel: MOTOR,pulse: number): void {
 		if (!initialized) {
             initPCA9685();
         }
