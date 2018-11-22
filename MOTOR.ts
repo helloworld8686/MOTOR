@@ -58,15 +58,14 @@ namespace Servo {
 
     function initPCA9685(): void {
         i2cwrite(PCA9685_ADDRESS, MODE1, 0x00)
-        setFreq(1000);
-        setPwm(0, 0, 4095);
-        for (let idx = 1; idx < 16; idx++) {
+        setFreq(50);
+        for (let idx = 0; idx < 16; idx++) {
             setPwm(idx, 0, 0);
         }
         initialized = true
     }
 
-    export function setFreq(freq: number): void {
+    function setFreq(freq: number): void {
         // Constrain the frequency
         let prescaleval = 25000000;
         prescaleval /= 4096;
@@ -109,16 +108,12 @@ namespace Servo {
 		// 50hz: 20,000 us
         let v_us = (degree * 1800 / 180 + 600); // 0.6 ~ 2.4
         let value = v_us * 4096 / 20000;
-
-        setPwm(14, 0, 0);   
-        setPwm(15, 0, 0);     
-
         setPwm(channel, 0, value);
     }
 	
 	/**
 	 * Servo Execute
-	 * @param pulse [500-2500] pulse of servo; eg: 1500, 500, 2500
+	 * @param pulse [0-20000] pulse of servo; eg: 1500, 500, 2500
 	*/
     //% blockId=setServoPulse block="电机  方向选择|%channel|速度 %pulse"
     //% weight=85
@@ -127,8 +122,6 @@ namespace Servo {
 		if (!initialized) {
             initPCA9685();
         }
-        setPwm(14, 0, 0);   
-        setPwm(15, 0, 0); 
 		// 50hz: 20,000 us
         let value = pulse * 4096 / 20000;
         setPwm(channel, 0, value);
