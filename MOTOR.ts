@@ -7,7 +7,7 @@
  * 自定义图形块
  */
 
-namespace MOTOR {
+namespace makerbit {
     const PCA9685_ADDRESS = 0x41
     const MODE1 = 0x00
     const MODE2 = 0x01
