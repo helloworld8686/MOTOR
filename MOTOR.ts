@@ -38,9 +38,14 @@ namespace makerbit {
 
     let initialized = false
 
-    export enum MOTOR { 
-        前进 = 15,
-        后退 = 14,
+    export enum MOTOR {
+        电机1 = 3,
+        电机2 = 14
+    }
+
+    export enum MOTOR_Dir { 
+        前进 = 0,
+        后退 = 1,
     }
 
     function i2cwrite(addr: number, reg: number, value: number) {
@@ -117,15 +122,25 @@ namespace makerbit {
 	 * @param pulse [0-19999] pulse of servo; eg: 1500, 500, 2500
 	*/
     //% subcategory="电机"
-    //% blockId=setServoPulseMotor block="电机  方向选择|%channel|速度 %pulse"
+    //% blockId=setServoPulseMotor block="电机 |%ID|方向选择|%MOTOR_Dir|速度设为|%pulse"
     //% weight=85
-    //% pulse.min=500 pulse.max=2500
-    export function ServoPulseMotor(channel: MOTOR,pulse: number): void {
+    //% pulse.min=500 pulse.max=19999
+    export function ServoPulseMotor(ID: MOTOR,Dir:MOTOR_Dir,pulse: number): void {
 		if (!initialized) {
             initPCA9685();
         }
 		// 50hz: 20,000 us
-        let value = pulse * 4096 / 20000;
-        setPwm(channel, 0, value);
+        let value = pulse * 4096 / 20000;    
+        if (Dir == MOTOR_Dir.前进) 
+        {
+            setPwm((ID), 0, 0);        
+        }   
+        else
+        {
+            setPwm((ID+1), 0, 0); 
+        }
+
+        setPwm((ID+Dir), 0, value);
+
     }
 }
