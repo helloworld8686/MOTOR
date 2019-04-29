@@ -39,14 +39,16 @@ namespace makerbit {
     let initialized = false
 
     export enum MOTOR {
-        电机1 = 3,
-        电机2 = 14
+        A = 3,
+        B = 14
     }
 
     export enum MOTOR_Dir { 
         前进 = 0,
         后退 = 1,
     }
+
+
 
     function i2cwrite(addr: number, reg: number, value: number) {
         let buf = pins.createBuffer(2)
@@ -124,7 +126,7 @@ namespace makerbit {
     //% subcategory="电机"
     //% blockId=setServoPulseMotor block="电机 |%ID|方向选择|%MOTOR_Dir|速度设为|%pulse"
     //% weight=85
-    //% pulse.min=500 pulse.max=19999
+    //% pulse.min=0 pulse.max=19999
     export function ServoPulseMotor(ID: MOTOR,Dir:MOTOR_Dir,pulse: number): void {
 		if (!initialized) {
             initPCA9685();
