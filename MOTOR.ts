@@ -6,7 +6,7 @@
 /**
  * 自定义图形块
  */
-//% weight=5 color=#0fbc11 icon="\uf0d1" block="电机马达"
+
 namespace MOTOR {
     const PCA9685_ADDRESS = 0x41
     const MODE1 = 0x00
@@ -98,6 +98,7 @@ namespace MOTOR {
 	 * Servo Execute
 	 * @param degree [0-180] degree of servo; eg: 90, 0, 180
 	*/
+    //% subcategory="电机"
     //% blockId=setServoMotor block="电机 方向选择|%channel|角度 %degree"
     //% weight=85
     //% degree.min=0 degree.max=180
@@ -115,6 +116,7 @@ namespace MOTOR {
 	 * Servo Execute
 	 * @param pulse [0-19999] pulse of servo; eg: 1500, 500, 2500
 	*/
+    //% subcategory="电机"
     //% blockId=setServoPulseMotor block="电机  方向选择|%channel|速度 %pulse"
     //% weight=85
     //% pulse.min=500 pulse.max=2500
